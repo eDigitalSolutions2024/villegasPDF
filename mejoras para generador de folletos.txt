@@ -1,0 +1,40 @@
+en la lantilla, se necesta tener nombre en ingels y español(listo)
+
+
+-se necesita tenr opcion de poder cambiar imagenes, fechas y direccion de manera dinámica(listo)
+
+
+-tambien a la hora en el historia se necesita la opcion de descargar en formato jpg(listo)
+
+
+-cambiar categoria de frutas y verduras y juntarlos(listo)
+
+-en el pdf se tiene que poder guardar las dos imagenes grandes y toda la categoria abajo, es importante que en los documentos se tenga una cantidad de productos especifica(listo, falta la cantidad de productos exacctos)
+
+
+-los metodos de pago abajo del pdf tiene que ser dinamico tambien ya que alguna de las 3 tiendas se manejan metodos de pago distintos (listo)
+
+
+mejoras segunda reunión
+
+
+	-en el folleto, fecha de validez abajo(listo)
+
+	-agregar nombres sutiles de títulos de categorías con traducción (listo)
+
+	-el orden de las categorías es fijo siempre, respetar el orden de los PowerPoint(listo)
+
+	-agregar traducción manual
+
+	-esperar los logos originales 
+
+	-los métodos de pago deben estar fijos con el logo de cada tienda eso no va a cambiar
+
+
+
+
+
+
+
+
+

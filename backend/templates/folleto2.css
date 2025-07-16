@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #000;
+}
+
+.contenedor {
+  width: 1000px;
+  margin: auto;
+  padding: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background: white;
+}
+
+.encabezado {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.logo-principal {
+  text-align: left;
+  width: 650px;
+  
+  object-fit: grid;
+  display: grid;
+
+  gap: 8px;
+  justify-items: center;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.barra-verde {
+  height: 6px;
+  background-color: #2a8f48;
+  margin-top: 10px;
+}
+
+/* GRILLA DE PRODUCTOS */
+.productos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 8px;
+  justify-items: center;
+  padding: 0;
+  margin-top: 5px;
+}
+/* TARJETA DE PRODUCTO */
+.producto-card {
+  width: 200px;
+  margin: 0px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 4px;
+  display: inline-block;
+}
+
+img.producto-imagen {
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+}
+.producto-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.producto-info {
+   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: -10px;
+  padding: 0 10px;
+}
+.producto-datos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.producto-nombres {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
+}
+.nombre-es {
+  font-family: 'Impact', sans-serif, condensed, bold;
+  font-size: 30px;
+   font-weight: bold;
+  color: #333;
+  margin-bottom: 2px;
+  text-align: left;
+  max-width: 60%;
+}
+.nombre-en {
+  font-size: 20px;
+  color: #777;
+  font-style: bold;
+  margin-top: -4px;
+}
+
+
+.producto-precio-vertical {
+   font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #C80000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  margin: 0px;
+  white-space: nowrap;
+  text-shadow: #d87e00 1px 1px 2px;
+}
+
+.precio-monto {
+font-family: 'Oswald Bold', sans-serif, condensed, bold;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.precio-unidad {
+  color: #C80000;
+  font-size: 20px;
+}
+
+
+.pie {
+  margin-top: 30px;
+  border-top: 2px solid #ccc;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #444;
+}
+
+.direccion {
+  background: #2a8f48;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.pagos img {
+  height: 20px;
+  margin-left: 10px;
+}
+
+.vigencia {
+  text-align: right;
+  font-size: 12px;
+}
+

@@ -1,0 +1,376 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: #e1cca1;
+  color: #333;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+   background:  #d3c2a0;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ENCABEZADO */
+.encabezado {
+  text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.encabezado img {
+  max-height: 80px;
+  object-fit: contain;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.encabezado .direccion {
+  font-size: 14px;
+  color: #444;
+  margin: 4px 0;
+}
+
+
+
+/* GRILLA DE PRODUCTOS */
+ .productos-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  
+}
+
+.productos-categoria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+
+.productos-categoria {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fila-productos {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* TARJETA DE PRODUCTO */
+.producto-card {
+  
+  box-sizing: border-box;
+  display: inline-block;
+  width: 200px;
+  margin: 0px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 4px;
+  
+}
+
+img.producto-imagen {
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+}
+.producto-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.producto-info {
+   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: -10px;
+  padding: 0 10px;
+}
+.producto-datos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.producto-nombres {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
+}
+.nombre-es {
+  font-family: 'Impact', sans-serif, condensed, bold;
+  font-size: 30px;
+   font-weight: bold;
+  color: #333;
+  margin-bottom: 2px;
+  text-align: left;
+  max-width: 60%;
+}
+.nombre-en {
+  font-size: 20px;
+  color: #777;
+  font-style: bold;
+  margin-top: -4px;
+}
+
+
+.producto-precio-vertical {
+   font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #C80000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  margin: 0px;
+  white-space: nowrap;
+  text-shadow: #d87e00 1px 1px 2px;
+}
+
+.precio-monto {
+font-family: 'Oswald Bold', sans-serif, condensed, bold;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.precio-unidad {
+  color: #C80000;
+  font-size: 20px;
+}
+
+/* PIE DE PÁGINA */
+.pie {
+  margin-top: 20px;
+  font-size: 12px;
+  text-align: center;
+  color: #666;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.fila-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: -20px;
+}
+
+.logos-izquierda {
+  display: block;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-izq {
+  width: 30px;
+  height: 50px;
+  text-align: left;
+  object-fit: contain;
+}
+
+.logo-centro {
+  width: 350px;
+  height: 300px;
+  object-fit: contain;
+}
+
+.fecha-folleto {
+  text-align: right;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #111;
+  line-height: 1.3;
+  font-weight: bold;
+}
+
+.fecha-folleto .validez-texto {
+  font-size: 15px;
+  color: #c80000;
+}
+
+.fecha-folleto .validez-fecha {
+  font-size: 14px;
+  color: #333;
+}
+
+.logos-superiores {
+  display: block;
+  text-align: left;
+  justify-content: space-between;
+  
+  padding: 0 10px;
+  margin-top: 10px;
+}
+
+.logo-lateral {
+  width: 100px;
+  object-fit: flex;
+}
+
+
+
+.footer-folleto {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px 25px;
+  margin-top: 30px;
+  border-top: 1px solid #ccc;
+  font-family: 'Arial', sans-serif;
+}
+
+.cuadro-direccion {
+  background-color: #2a8f48;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.footer-derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.metodos-pago img {
+  height: 20px;
+  margin-left: 10px;
+}
+
+.fecha-folleto {
+  font-size: 13px;
+  color: #444;
+  text-align: right;
+  line-height: 1.4;
+}
+.categoria-fila {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.categoria-titulo {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+  text-align: left;
+  color: #333;
+  text-transform: uppercase;
+  border-bottom: 2px solid #888;
+  padding-bottom: 5px;
+}
+
+.contenedor-todas-categorias {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.categoria-bloque {
+  width: 100%;
+}
+.separador{
+  text-align: center;
+  display: block;
+  }
+.separador .tit-cat {
+ /* font-family: 'Impact', sans-serif, condensed, bold;*/
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+  background: linear-gradient(to right, #c31432, #f7971e);
+
+  padding: 8px 0;
+  border-radius: 6px;
+}
+.separador .tit-cat-en {
+  font-size: 20px;
+  text-align: center;
+  font-style: italic;
+  margin-top: -14px;
+  text-shadow: #666 1px 1px 2px;
+  color: #444;
+}
+
+
+.categoria-titulo {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: center;
+  color: #333;
+  text-transform: uppercase;
+  border-bottom: 2px solid #888;
+  padding-bottom: 10px;
+}
+
+.fila-dos-productos{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+ 
+}
+.fila-dos-productos img {
+  width: 200px;
+ height: auto;
+  
+}
+
+.fila-dos-productos .producto-card {
+  width: 48%;
+  display: flex;
+  
+  gap: 10px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+.fila-dos-productos .producto-card .producto-datos {
+  margin-left: -20px;
+  text-align: left;
+  display: block;
+  font-size: large;
+}
+
+.fila-tres-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  
+}
+
+.fila-tres-productos .producto-card {
+  width: 30%;
+  margin-left:15px ;
+  margin-bottom: -20px;
+}
+
+.fila-tres-productos img{
+ width: 170px;
+  
+
+}
+
+
