@@ -1,0 +1,61 @@
+.folleto-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.producto-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 12px;
+  width: 180px;
+  text-align: center;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+.config-container {
+  background-color: #f1f1f1;
+  padding: 2rem;
+  border-radius: 12px;
+  /*max-width: 900px;*/
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.config-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.config-row label {
+  font-weight: bold;
+  color: #333;
+  min-width: 130px;
+}
+
+.config-row select,
+.config-row input[type="text"] {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 180px;
+  font-size: 1rem;
+}
+
+.metodos-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.metodos-checkboxes label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
