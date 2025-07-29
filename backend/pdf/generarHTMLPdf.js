@@ -48,6 +48,27 @@ async function generarHTMLPdf(req, res, opciones = {}) {
   try {
     
     const fechaValidez = req.query.fechaValidez || 'del 1 al 7 de Julio de 2025';
+    
+
+    function traducirFecha(fechaEs) {
+      const meses = {
+        enero: 'January', febrero: 'February', marzo: 'March', abril: 'April',
+        mayo: 'May', junio: 'June', julio: 'July', agosto: 'August',
+        septiembre: 'September', octubre: 'October', noviembre: 'November', diciembre: 'December'
+      };
+
+      const match = fechaEs.match(/del\s+(\d+)\s+al\s+(\d+)\s+de\s+(\w+)\s+de\s+(\d{4})/i);
+      if (!match) return 'From ? to ?';
+
+      const [, diaInicio, diaFin, mesEs, anio] = match;
+      const mesEn = meses[mesEs.toLowerCase()] || mesEs;
+
+      return `From ${mesEn} ${diaInicio} to ${diaFin}, ${anio}`;
+    }
+
+    const fechaValidezEn = traducirFecha(fechaValidez);
+    
+    const fondo = req.query.fondo || '#ffffff'; // Puede ser color o URL de imagen
 
     const productos = await Producto.find({ promocion: true });
 
@@ -65,9 +86,10 @@ async function generarHTMLPdf(req, res, opciones = {}) {
 
     // Traducir nombres
     for (const p of productos) {
-      const traduccion = await traducirTexto(p.nombre);
+      const traduccion = p.nombreInglesManual || await traducirTexto(p.nombre);
       p.nombreIngles = traduccion || p.nombre;
       await p.save();
+
     }
 
     
@@ -90,9 +112,13 @@ const logoDer = getBase64Logo(req.query.logoDer || 'harris.png');
       /*.replace('{{ria}}', riaSrc)
       .replace('{{visa}}', visaSrc)
       .replace('{{money}}', MoneySrc)*/
-      .replace('{{FECHA_VALIDEZ}}', fechaValidez);
-
-    // Generar los bloques HTML por categoría
+      .replace('{{FECHA_VALIDEZ}}', fechaValidez)
+      .replace('{{FECHA_VALIDEZ_EN}}', fechaValidezEn)
+      .replace('<body>', `<body style="background: ${fondo}; background-size: cover; background-repeat: no-repeat;">`);
+    
+    
+    
+      // Generar los bloques HTML por categoría
     let htmlProductos = '';
     for (const categoria of ordenCategorias) {
       const productosCategoria = productosPorCategoria[categoria];
@@ -102,9 +128,11 @@ const logoDer = getBase64Logo(req.query.logoDer || 'harris.png');
       
 
       htmlProductos += `<div class="categoria-bloque">
-      <div class="separador">
-        <h1 class="tit-cat">${categoria.toUpperCase()}</h1>
-        <h1 class="tit-cat-en">${categoriaIngles.toUpperCase()}</h1>
+      <div class="categoria-minimal">
+        <div class="categoria-nombre">
+          <span class="es">${categoria.toUpperCase()}</span>
+          <span class="en">/ ${categoriaIngles.toUpperCase()}</span>
+        </div>
       </div>
       `
       ;
@@ -185,8 +213,8 @@ const logoDer = getBase64Logo(req.query.logoDer || 'harris.png');
     // Leer dinámicamente los logos de métodos de pago
     let metodosHTML = '';
       try {
-        const metodosSeleccionados = (req.query.metodos || '').split(',').filter(Boolean);
-        for (const archivo of metodosSeleccionados) {
+        const metodosFijos = ['visa.png', 'mastercard.png', 'RIA.png', 'MoneyGram.png']; // Puedes cambiar o agregar más
+        for (const archivo of metodosFijos) {
           const metodoPath = path.join(metodosPath, archivo);
           if (fs.existsSync(metodoPath)) {
             const mimeType = mime.lookup(metodoPath);
@@ -194,9 +222,8 @@ const logoDer = getBase64Logo(req.query.logoDer || 'harris.png');
             const src = `data:${mimeType};base64,${base64}`;
             metodosHTML += `<img class="logo-pago" src="${src}" alt="${archivo}" />\n`;
           }
-          //console.log('Métodos seleccionados:', req.query.metodos);
-
         }
+
       } catch (err) {
         console.error('Error leyendo métodos de pago:', err.message);
       }

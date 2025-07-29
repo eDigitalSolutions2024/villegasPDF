@@ -9,7 +9,8 @@ const productoSchema = new mongoose.Schema({
   unidad: { type: String, required: true },
   categoria: { type: String, required: true }, // Categoría del producto en inglés
   imagen: { type: String }, // Ruta de la imagen guardada
-  promocion: { type: Boolean, default: false } // Indica si es un producto en promoción
+  promocion: { type: Boolean, default: false },// Indica si es un producto en promoción
+  nombreInglesManual: { type: String, default: ''}
 });
 
 module.exports = mongoose.model('Producto', productoSchema);

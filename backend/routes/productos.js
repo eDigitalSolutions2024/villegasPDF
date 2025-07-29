@@ -77,6 +77,43 @@ router.put('/:id/promocion', async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const eliminado = await Producto.findByIdAndDelete(id);
+
+    if (!eliminado) {
+      console.log("⚠️ Producto no encontrado en la base de datos:", id);
+      return res.status(404).json({ mensaje: "Producto no encontrado" });
+    }
+
+    console.log("✅ Producto eliminado:", eliminado);
+    res.status(200).json({ mensaje: "Producto eliminado correctamente" });
+  } catch (error) {
+    console.error("❌ Error al eliminar producto:", error);
+    res.status(500).json({ mensaje: "Error al eliminar el producto" });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const producto = await Producto.findById(req.params.id);
+    if (!producto) return res.status(404).json({ mensaje: 'No encontrado' });
+
+    producto.nombre = req.body.nombre;
+    producto.precio = req.body.precio;
+    producto.unidad = req.body.unidad;
+    producto.categoria = req.body.categoria;
+    producto.nombreInglesManual = req.body.nombreInglesManual || '';
+    await producto.save();
+
+    res.json({ mensaje: 'Actualizado correctamente' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error del servidor' });
+  }
+});
+
 
 
 module.exports = router;

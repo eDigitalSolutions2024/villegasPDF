@@ -8,8 +8,8 @@ const GenerarFolleto = () => {
   const [iframeSrc, setIframeSrc] = useState('');
   const [fechaValidez, setFechaValidez] = useState('del 1 al 7 de Julio de 2025');
   const [metodosPago, setMetodosPago] = useState([]);
-    const [metodosSeleccionados, setMetodosSeleccionados] = useState([]);
-
+  const [metodosSeleccionados, setMetodosSeleccionados] = useState([]);
+  const [fondo, setFondo] = useState(' #d3c2a0');
   // Actualizar el iframe cuando cambian los logos o la plantilla
   useEffect(() => {
     const query = new URLSearchParams({
@@ -19,21 +19,34 @@ const GenerarFolleto = () => {
       metodos: metodosSeleccionados.join(',')
     }).toString();
 
-    setIframeSrc(`http://localhost:4000/api/folleto/ver-folleto${plantilla}?logoCentro=${logoCentro}&logoIzq=${logoIzq}&logoDer=${logoDer}&fechaValidez=${encodeURIComponent(fechaValidez)}&metodos=${metodosSeleccionados.join(',')}`);
-  }, [plantilla, logoCentro, logoIzq, logoDer, fechaValidez,metodosSeleccionados]);
+    setIframeSrc(
+        `http://localhost:4000/api/folleto/ver-folleto${plantilla}?` +
+        `logoCentro=${logoCentro}&logoIzq=${logoIzq}&logoDer=${logoDer}` +
+        `&fechaValidez=${encodeURIComponent(fechaValidez)}` +
+        `&metodos=${metodosSeleccionados.join(',')}` +
+        `&fondo=${encodeURIComponent(fondo)}`
+      ); 
+    }, [plantilla, logoCentro, logoIzq, logoDer, fechaValidez,metodosSeleccionados,fondo]);
 
   const guardarPdf = async () => {
     const token = localStorage.getItem('token');
 
     try {
-      const res = await fetch(`http://localhost:4000/api/folleto/guardar-pdf${plantilla}?logoCentro=${logoCentro}&logoIzq=${logoIzq}&logoDer=${logoDer}&fechaValidez=${encodeURIComponent(fechaValidez)}&metodos=${metodosSeleccionados.join(',')}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ logoCentro, logoIzq, logoDer })
-      });
+      const res = await fetch(
+        `http://localhost:4000/api/folleto/guardar-pdf${plantilla}?` +
+        `logoCentro=${logoCentro}&logoIzq=${logoIzq}&logoDer=${logoDer}` +
+        `&fechaValidez=${encodeURIComponent(fechaValidez)}` +
+        `&metodos=${metodosSeleccionados.join(',')}` +
+        `&fondo=${encodeURIComponent(fondo)}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ logoCentro, logoIzq, logoDer })
+        }
+      );
 
       if (!res.ok) throw new Error('Error al guardar el PDF');
       const data = await res.json();
@@ -112,8 +125,17 @@ const GenerarFolleto = () => {
           placeholder="Ej: del 1 al 7 de Julio de 2025"
         />
       </div>
+      {/* Fondo predefinido */}
+      <div className="config-row">
+        <label>Fondo del folleto:</label>
+        <select value={fondo} onChange={(e) => setFondo(e.target.value)}>
+          <option value="#d3c2a0">Cremita clásico</option>
+          <option value="#fff6cc">Amarillo suave</option>
+          <option value="#f0ebe3">Gris topo claro</option>
+        </select>
+      </div>
 
-      {/* Métodos de pago */}
+      {/* Métodos de pago 
       <div className="config-row">
         <label>Métodos de pago:</label>
         <div className="metodos-checkboxes">
@@ -129,15 +151,18 @@ const GenerarFolleto = () => {
             </label>
           ))}
         </div>
-      </div>
+      </div>*/}
+
     </div>
+
+    
 
     {/* Vista previa del PDF */}
     <div style={{ flex: 1 }}>
       <iframe
         title="Vista previa del Folleto PDF"
         src={iframeSrc}
-        style={{ width: '100%', height: '500px', border: 'none' }}
+        style={{ width: '100%', height: '1000px', border: 'none' }}
       />
     </div>
 

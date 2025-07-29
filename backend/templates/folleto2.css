@@ -1,53 +1,53 @@
 body {
+  width: 8.5in;
+  height: 11in; /* o 14in según el alto de tu hoja */
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #fff;
-  color: #000;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden; /* ¡Muy importante para evitar desbordes! */
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.contenedor {
-  width: 1000px;
-  margin: auto;
-  padding: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background: white;
-}
-
+/* ENCABEZADO */
 .encabezado {
-  text-align: center;
-  padding: 10px 0;
+  background: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 150px;
 }
 
-.logo-principal {
+.fila-encabezado {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logos-izquierda {
+  display: flex;
+  align-items: center;
+}
+.logo-fijo-izquierda {
   text-align: left;
-  width: 650px;
+}
+
+.logo-centro {
+  margin-top: -30px;
+  height: 250px;
+  width: 500px;
+  object-fit: contain;
+  text-align: top;
+}
   
-  object-fit: grid;
-  display: grid;
+/*Producto destacado a la derecha */
 
-  gap: 8px;
-  justify-items: center;
-  padding: 0;
-  margin-top: 5px;
-}
-
-.barra-verde {
-  height: 6px;
-  background-color: #2a8f48;
-  margin-top: 10px;
-}
-
-/* GRILLA DE PRODUCTOS */
-.productos {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 1fr));
-  gap: 8px;
-  justify-items: center;
-  padding: 0;
-  margin-top: 5px;
-}
-/* TARJETA DE PRODUCTO */
-.producto-card {
+.producto-derecha .producto-card {
+   box-sizing: border-box;
+  display: inline-block;
   width: 200px;
   margin: 0px;
   text-align: center;
@@ -55,9 +55,8 @@ body {
   border: none;
   box-shadow: none;
   padding: 4px;
-  display: inline-block;
+  margin-bottom: 40px;
 }
-
 img.producto-imagen {
   width: 100%;
   max-height: 120px;
@@ -91,7 +90,7 @@ img.producto-imagen {
   font-family: 'Impact', sans-serif, condensed, bold;
   font-size: 30px;
    font-weight: bold;
-  color: #333;
+  color: #000000;
   margin-bottom: 2px;
   text-align: left;
   max-width: 60%;
@@ -102,8 +101,6 @@ img.producto-imagen {
   font-style: bold;
   margin-top: -4px;
 }
-
-
 .producto-precio-vertical {
    font-family: 'Bebas Neue', sans-serif;
   font-size: 20px;
@@ -132,31 +129,145 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
 }
 
 
-.pie {
-  margin-top: 30px;
-  border-top: 2px solid #ccc;
-  padding-top: 10px;
+
+
+/*Resto de productos */
+
+.contenedor-todas-categorias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-height: 70vh; /* ajusta para que quepa con encabezado/pie */
+  overflow: hidden;
+  gap: 16px;
+  padding: 20px;
+}
+
+ .producto-card {
+   box-sizing: border-box;
+  display: inline-block;
+  width: 200px;
+  margin: 20px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 4px;
+  margin-top: -60px;
+ 
+}
+
+.fila-5 .producto-card {
+  flex: 1 1 calc(16.66% - 20px);
+  max-width: calc(16.66% - 20px);
+  width: 100px;
+}
+.fila-5 .nombre-es {
+  font-size: 1rem;
+}
+
+.fila-5 .nombre-en {
+  font-size: 0.75rem;
+}
+
+.fila-5 .precio-monto {
+  font-size: 1.2rem;
+}
+
+.fila-5 .precio-unidad {
+  font-size: 0.75rem;
+}
+
+
+
+
+
+.fila-4 .producto-card {
+  flex: 1 1 calc(25% - 20px);
+  max-width: calc(25% - 20px);
+  width: 150px;
+}
+.fila-4 .nombre-es {
+  font-size: 1.2rem;
+}
+
+.fila-4 .nombre-en {
+  font-size: 0.9rem;
+}
+
+.fila-4 .precio-monto {
+  font-size: 1.4rem;
+}
+
+.fila-4 .precio-unidad {
+  font-size: 0.85rem;
+}
+
+
+
+
+
+.fila-3 .producto-card {
+  flex: 1 1 calc(33.33% - 20px);
+  max-width: calc(33.33% - 20px);
+}
+.fila-3 .nombre-es {
+  font-size: 1.4rem;
+}
+
+.fila-3 .nombre-en {
+  font-size: 1rem;
+}
+
+.fila-3 .precio-monto {
+  font-size: 1.6rem;
+}
+
+.fila-3 .precio-unidad {
+  font-size: 0.9rem;
+}
+
+
+
+/*Footer*/
+
+  .footer-folleto {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  color: #444;
+  align-items: flex-start;
+  padding: 15px 25px;
+  margin-top: 30px;
+  border-top: 1px solid #ccc;
+  font-family: 'Arial', sans-serif;
 }
 
-.direccion {
-  background: #2a8f48;
+.cuadro-direccion {
+  background-color: #2a8f48;
   color: white;
-  padding: 10px;
+  padding: 12px 20px;
   border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.pagos img {
+.footer-derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.metodos-pago img {
   height: 20px;
   margin-left: 10px;
 }
 
-.vigencia {
+.fecha-folleto {
+  font-size: 13px;
+  color: #444;
   text-align: right;
-  font-size: 12px;
+  line-height: 1.4;
 }
-

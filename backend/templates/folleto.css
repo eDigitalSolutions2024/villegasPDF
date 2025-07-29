@@ -2,14 +2,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background: #e1cca1;
+  
   color: #333;
 }
 
 .container {
   max-width: 1000px;
   margin: auto;
-   background:  #d3c2a0;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -113,7 +112,7 @@ img.producto-imagen {
   font-family: 'Impact', sans-serif, condensed, bold;
   font-size: 30px;
    font-weight: bold;
-  color: #333;
+  color: #000000;
   margin-bottom: 2px;
   text-align: left;
   max-width: 60%;
@@ -289,31 +288,8 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
 .categoria-bloque {
   width: 100%;
 }
-.separador{
-  text-align: center;
-  display: block;
-  }
-.separador .tit-cat {
- /* font-family: 'Impact', sans-serif, condensed, bold;*/
-  font-size: 32px;
-  font-weight: 900;
-  text-align: center;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
-  background: linear-gradient(to right, #c31432, #f7971e);
 
-  padding: 8px 0;
-  border-radius: 6px;
-}
-.separador .tit-cat-en {
-  font-size: 20px;
-  text-align: center;
-  font-style: italic;
-  margin-top: -14px;
-  text-shadow: #666 1px 1px 2px;
-  color: #444;
-}
-
+*/
 
 .categoria-titulo {
   font-size: 28px;
@@ -374,3 +350,59 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
 }
 
 
+.categoria-minimal {
+ margin: 1.5rem 0 1rem;
+  padding-bottom: 4px;
+  border-bottom: 4px solid transparent;
+  background-image: linear-gradient(to right, #c31432, #f7971e);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 100% 4px;
+  width: 100%;
+  text-align: left;
+}
+
+.categoria-nombre {
+  font-family: 'Impact', sans-serif, condensed, bold;
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  color: #bbbbbb;
+  text-shadow: 2px 2px 5px rgba(255, 196, 0, 0.699);
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.categoria-nombre .en {
+  font-family: 'Impact', sans-serif, condensed, bold;
+  font-size: 20px;
+  text-align: center;
+  font-style: italic;
+  margin-top: -14px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #777;
+}
+/*.separador{
+  text-align: center;
+  display: block;
+  }
+.separador .tit-cat {
+ /* font-family: 'Impact', sans-serif, condensed, bold;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+  background: linear-gradient(to right, #c31432, #f7971e);
+
+  padding: 8px 0;
+  border-radius: 6px;
+}
+.separador .tit-cat-en {
+  font-size: 20px;
+  text-align: center;
+  font-style: italic;
+  margin-top: -14px;
+  text-shadow: #666 1px 1px 2px;
+  color: #444;
+}

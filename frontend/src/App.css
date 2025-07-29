@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+body.modal-open {
+  overflow: hidden;
+}
+.modal {
+  z-index: 1050;
+}
+
+.modal-backdrop {
+  z-index: 1040;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import EditarProducto from './EditarProducto';
+import '../styles/Productos.css';
 const Productos = () => {
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
@@ -8,6 +9,8 @@ const Productos = () => {
   const [categoria, setCategoria] = useState("");
   const [imagen, setImagen] = useState(null);
   const [productos, setProductos] = useState([]);
+  const [productoEditando, setProductoEditando] = useState(null);
+
 
   useEffect(() => {
     cargarProductos();
@@ -65,9 +68,26 @@ const Productos = () => {
     console.error("Error actualizando promoción:", error);
   }
 };
+const eliminarProducto = async (id) => {
+  if (!id) {
+    console.error("ID inválido para eliminar producto");
+    return;
+  }
+
+  const confirmar = window.confirm("¿Estás seguro de que deseas eliminar este producto papu?");
+  if (!confirmar) return;
+
+  try {
+    await axios.delete(`http://localhost:4000/api/productos/${id}`);
+    setProductos((prev) => prev.filter((prod) => prod._id !== id));
+  } catch (error) {
+    console.error("Error al eliminar producto", error);
+  }
+};
 
 
   return (
+    
     <div className="container mt-4">
       <h2 className="mb-4">Subir Producto</h2>
       <div className="row g-3">
@@ -157,12 +177,87 @@ const Productos = () => {
                   title="Marcar como promoción"
                 />
                 <label className="form-check-label ms-2">Seleccionar</label>
+                <br></br>
+                <button
+                  className="btn btn-sm btn-danger mt-2"
+                  onClick={() => eliminarProducto(producto._id)}
+                >
+                  Eliminar
+                </button>
+                
+                <button 
+                style={{ marginLeft: '10px' }}
+                  className="btn btn-sm btn-info mt-2"
+                  onClick={() => setProductoEditando(producto)}>
+                  Editar
+                  </button>
+
               </div>
             </div>
           </div>
         ))}
+        
+        {productoEditando && (
+  <>
+    {/* Fondo oscuro */}
+    <div
+      className="modal-backdrop fade show"
+      style={{
+        zIndex: 1040,
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      }}
+    ></div>
+
+    {/* Contenido del modal */}
+    <div
+      className="modal fade show d-block"
+      tabIndex="-1"
+      role="dialog"
+      style={{
+        zIndex: 1050,
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+        width: '90%',
+        maxWidth: '800px',
+      }}
+    >
+      <div className="modal-header">
+        <h5 className="modal-title">Editar Producto</h5>
+        <button
+          type="button"
+          className="btn-close"
+          onClick={() => setProductoEditando(null)}
+        ></button>
+      </div>
+      <div className="modal-body">
+        <EditarProducto
+          producto={productoEditando}
+          onClose={() => setProductoEditando(null)}
+          onSave={() => {
+            setProductoEditando(null);
+            cargarProductos();
+          }}
+        />
       </div>
     </div>
+  </>
+)}
+
+
+
+      </div>
+    </div>
+    
   );
 };
 
