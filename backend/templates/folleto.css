@@ -21,27 +21,21 @@ body {
 }
 
 .encabezado img {
-  max-height: 80px;
+  max-height: 180px;
   object-fit: contain;
   margin-bottom: 0;
   margin-top: 10px;
 }
 
-.encabezado .direccion {
-  font-size: 14px;
-  color: #444;
-  margin: 4px 0;
-}
-
 
 
 /* GRILLA DE PRODUCTOS */
- .productos-grid {
+ /*.productos-grid {
   display: flex;
   flex-direction: column;
   gap: 40px;
   
-}
+}*/
 
 .productos-categoria {
   display: flex;
@@ -66,11 +60,10 @@ body {
 
 /* TARJETA DE PRODUCTO */
 .producto-card {
-  
   box-sizing: border-box;
   display: inline-block;
-  width: 200px;
-  margin: 0px;
+  margin: 5px;
+  margin-top: 10px;
   text-align: center;
   background: transparent;
   border: none;
@@ -92,15 +85,10 @@ img.producto-imagen {
 .producto-info {
    display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-top: -10px;
+  text-align: right;
   padding: 0 10px;
 }
-.producto-datos {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
+
 
 .producto-nombres {
   display: flex;
@@ -109,48 +97,60 @@ img.producto-imagen {
   margin-right: 10px;
 }
 .nombre-es {
-  font-family: 'Impact', sans-serif, condensed, bold;
-  font-size: 30px;
+  font-family: 'Arial', sans-serif, condensed, bold;
    font-weight: bold;
   color: #000000;
   margin-bottom: 2px;
   text-align: left;
-  max-width: 60%;
+  max-width: 100%;
+ 
 }
 .nombre-en {
-  font-size: 20px;
   color: #777;
-  font-style: bold;
-  margin-top: -4px;
+  font-family: 'Arial', sans-serif, condensed, bold;
+   font-weight: bold;
+  margin-bottom: 2px;
+  text-align: left;
+  max-width: 100%;
+ 
 }
 
 
 .producto-precio-vertical {
-   font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
+  font-family: 'Bebas Neue', sans-serif;
   font-weight: bold;
-  color: #C80000;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  gap: 2px;
-  text-align: right;
-  margin: 0px;
+  background-color: #C80000;
+  padding: 10px;
+  border-radius: 20px;
+  min-height: 44px;
+  min-width: 10rem; 
+  /* 👇 cambios clave */
+  display: inline-flex;        /* se ajusta al contenido */
+  justify-content: center;     /* centrar horizontal */
+  align-items: center;         /* centrar vertical */
+  gap: 6px;
+  text-align: center;
   white-space: nowrap;
-  text-shadow: #d87e00 1px 1px 2px;
+  line-height: 1;              /* evita extra espacio vertical */
+  /* opcional: anchura/altura mínimas para consistencia visual */
+  /* min-height: 44px; min-width: 9.5rem; */
 }
 
 .precio-monto {
-font-family: 'Oswald Bold', sans-serif, condensed, bold;
-  font-size: 45px;
-  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;              /* 👈 importante */
 }
 
 .precio-unidad {
-  color: #C80000;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 800;
+  color: #fff;
   font-size: 20px;
+  line-height: 1;              /* 👈 importante */
 }
+
 
 /* PIE DE PÁGINA */
 .pie {
@@ -162,30 +162,22 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
   padding-top: 10px;
 }
 
-.fila-encabezado {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  margin-bottom: -20px;
-}
-
 .logos-izquierda {
   display: block;
   align-items: center;
-  gap: 20px;
+  width: 100%;
 }
 
 .logo-izq {
-  width: 30px;
-  height: 50px;
-  text-align: left;
+  width: 80px;
+  height: auto;
+  text-align: center;
   object-fit: contain;
 }
 
 .logo-centro {
-  width: 350px;
-  height: 300px;
+  width: 550px;
+  max-height: 200px;
   object-fit: contain;
 }
 
@@ -236,6 +228,7 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
 
 .cuadro-direccion {
   background-color: #2a8f48;
+  width: 30%;
   color: white;
   padding: 12px 20px;
   border-radius: 4px;
@@ -289,120 +282,194 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
   width: 100%;
 }
 
-*/
-
 .categoria-titulo {
   font-size: 28px;
   font-weight: bold;
-  margin: 20px 0;
   text-align: center;
   color: #333;
   text-transform: uppercase;
   border-bottom: 2px solid #888;
-  padding-bottom: 10px;
 }
 
 .fila-dos-productos{
   display: flex;
-  gap: 10px;
   justify-content: flex-start;
  
 }
 .fila-dos-productos img {
   width: 200px;
- height: auto;
-  
+ height: 190px;
+ 
 }
 
 .fila-dos-productos .producto-card {
-  width: 48%;
+  width: 50%;
   display: flex;
-  
-  gap: 10px;
   justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-top: -30px;
 }
-.fila-dos-productos .producto-card .producto-datos {
+.fila-dos-productos .producto-info {
+  margin-top: 50px;
+  margin-right: 20px;
   margin-left: -20px;
-  text-align: left;
   display: block;
-  font-size: large;
 }
 
-.fila-tres-productos {
+.fila-dos-productos .nombre-en {
+  font-size: 20px;
+}
+.fila-dos-productos .nombre-es {
+  font-size: 28px;
+}
+.fila-dos-productos .precio-monto {
+  font-size: 40px;
+}
+.fila-dos-productos .precio-unidad {
+  font-size: 16px;  /* tamaño distinto para la unidad */
+  font-weight: normal;
+  margin-left: 2px;
+}
+
+
+.fila-cuatro-productos {
+
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
+  justify-content: center;
+  
   
 }
 
-.fila-tres-productos .producto-card {
+.fila-cuatro-productos .producto-card {
   width: 30%;
-  margin-left:15px ;
-  margin-bottom: -20px;
+  border: 1px solid #000000;
 }
 
-.fila-tres-productos img{
+
+.fila-cuatro-productos .producto-img{
  width: 170px;
-  
-
+ height: 170px;
+ margin-top: 45px;
+ margin-bottom: 15px;
 }
-
-
-.categoria-minimal {
- margin: 1.5rem 0 1rem;
-  padding-bottom: 4px;
-  border-bottom: 4px solid transparent;
-  background-image: linear-gradient(to right, #c31432, #f7971e);
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  background-size: 100% 4px;
+.fila-cuatro-productos .producto-info{
+  display: flex;
   width: 100%;
-  text-align: left;
+  flex-direction: flex;
+  text-align: right;
+  align-items: flex-start;
+  margin-top: -30px;
+
 }
+.fila-cuatro-productos .producto-precio-vertical {
+  position: absolute;
+}
+.fila-cuatro-productos .producto-nombres {
+  display: flex;
+  
+  
+}
+.fila-cuatro-productos .nombre-en {
+  font-size: 20px;
+}
+.fila-cuatro-productos .nombre-es {
+  font-size: 25px;
+}
+.fila-cuatro-productos .precio-monto {
+  font-size: 40px;
+}
+
+
+
+
 
 .categoria-nombre {
-  font-family: 'Impact', sans-serif, condensed, bold;
-  font-size: 2rem;
+  font-family: 'Verdana',italic, condensed, bold;
+  font-size: 5rem;
   font-weight: 900;
-  text-align: center;
-  color: #bbbbbb;
-  text-shadow: 2px 2px 5px rgba(255, 196, 0, 0.699);
-  font-family: 'Helvetica Neue', sans-serif;
+  color: #000000;
+   display: flex;
+   text-align: center !important;
+  align-items: center;
+  margin-bottom: 35px;
+  box-shadow:
+   inset -2px -2px 2px #000000;
+ 
+  
 }
 
 .categoria-nombre .en {
-  font-family: 'Impact', sans-serif, condensed, bold;
-  font-size: 20px;
-  text-align: center;
-  font-style: italic;
-  margin-top: -14px;
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: #777;
-}
-/*.separador{
-  text-align: center;
-  display: block;
-  }
-.separador .tit-cat {
- /* font-family: 'Impact', sans-serif, condensed, bold;
-  font-size: 32px;
+  font-family: 'Verdana',italic, condensed, bold;
+  font-size: 5rem;
   font-weight: 900;
   text-align: center;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
-  background: linear-gradient(to right, #c31432, #f7971e);
+  color: #777;
+}
 
-  padding: 8px 0;
-  border-radius: 6px;
+
+.logo-harris-inline {
+  height: 45px;
+  margin-left: 10px;
+  vertical-align: middle;
+  text-align: right;
 }
-.separador .tit-cat-en {
-  font-size: 20px;
+
+.categoria-texto {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 10px;
   text-align: center;
-  font-style: italic;
-  margin-top: -14px;
-  text-shadow: #666 1px 1px 2px;
-  color: #444;
 }
+
+.categoria-texto .en {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: bold;
+  color: #777;
+}
+
+
+
+.footer-map{
+width: 180px;
+height: 110px;
+
+}
+
+/* ===== Paginación por categoría ===== */
+@page { size: 8.5in 14in; margin: 0; }
+
+.cat-page {
+  width: 8.5in;
+  height: auto;
+  box-sizing: border-box;
+  padding: 0.25in;
+  overflow: hidden;         /* que no se desborde */
+  position: relative;
+  break-after: page;        /* 1 sección = 1 hoja */
+  page-break-after: always;
+  /*margin-top: 20px; /* compatibilidad */
+}
+
+.cat-page:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+.cat-header {
+  font-weight: 800;
+  font-size: 28px;
+  margin: 6px 0 12px;
+}
+
+/* contenedor de tarjetas de la categoría (ajústalo a tu grid actual) */
+.cat-page .productos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 por fila */
+  gap: 12px;
+}
+
+
+/* evita que una card se corte entre páginas (defensivo) 
+.producto-card { break-inside: avoid; }*/
+

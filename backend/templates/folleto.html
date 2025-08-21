@@ -8,16 +8,12 @@
 <body>
 
   <div class="container">
-  <div class="encabezado">
-  <div class="fila-encabezado">
-    <div class="logos-izquierda">
-      <img src="{{LOGO_CENTRO}}" alt="LogoCentro" class="logo-centro">
-      <img src="{{LOGOIZQ}}" alt="LogoIzq" class="logo-izq">
-      
-    </div>
+    <div class="encabezado">
+        <div class="logos-izquierda">
+          <img src="{{LOGO_CENTRO}}" alt="LogoCentro" class="logo-centro">
+        </div>
     
-  </div>
-</div>
+    </div>
 
   
 
@@ -27,12 +23,16 @@
 
   
   <div class="footer-folleto">
+
   <div class="cuadro-direccion">
-    <div class="direccion">340 W Grant Line, Tracy, CA</div>
-    <div class="telefono">(209) 123-4567</div>
+    <div class="direccion">{{DIRECCION}}</div>
+    <div class="telefono">{{TELEFONO}}</div>
   </div>
 
-  <div class="footer-derecha">
+  <img class="footer-map" src="{{MAPA_TIENDA}}" alt="Mapa sucursal">
+  
+
+<div class="footer-derecha">
     <div class="fecha-folleto">
       <div class="validez-texto">Precios válidos</div>
         <div class="fecha-validez">
@@ -42,6 +42,8 @@
         </div>
       </div>
     </div>
+
+    
     <!-- En tu plantilla HTML -->
     <div class="metodos-pago">
       <!-- Aquí van los logos -->

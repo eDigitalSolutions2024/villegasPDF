@@ -1,10 +1,11 @@
 body {
   width: 8.5in;
-  height: 11in; /* o 14in según el alto de tu hoja */
+  min-height: 11in; /* o 14in según el alto de tu hoja */
+  height: auto;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden; /* ¡Muy importante para evitar desbordes! */
+  overflow: visible; /* ¡Muy importante para evitar desbordes! */
 }
 .container {
   width: 100%;
@@ -31,6 +32,7 @@ body {
   display: flex;
   align-items: center;
 }
+
 .logo-fijo-izquierda {
   text-align: left;
 }
@@ -48,24 +50,38 @@ body {
 .producto-derecha .producto-card {
    box-sizing: border-box;
   display: inline-block;
-  width: 200px;
+  width: 150px;
   margin: 0px;
   text-align: center;
   background: transparent;
   border: none;
   box-shadow: none;
   padding: 4px;
-  margin-bottom: 40px;
+  margin-bottom:40px ;
+  margin-left: 40px;
 }
-img.producto-imagen {
-  width: 100%;
-  max-height: 120px;
-  object-fit: contain;
+.producto-derecha .producto-img {
+  width: 200px;
+  height: 150px;
+ 
 }
-.producto-img {
-  max-width: 100%;
-  height: auto;
+
+.producto-derecha .nombre-es {
+  font-size: 1.2rem;
 }
+
+.producto-derecha .nombre-en {
+  font-size: 0.9rem;
+}
+
+.producto-derecha .precio-monto {
+  font-size: 1.4rem;
+}
+
+.producto-derecha .precio-unidad {
+  font-size: 0.85rem;
+}
+
 
 .producto-info {
    display: flex;
@@ -85,51 +101,55 @@ img.producto-imagen {
   flex-direction: column;
   align-items: flex-start;
   margin-right: 10px;
+  width: 100%;
 }
 .nombre-es {
-  font-family: 'Impact', sans-serif, condensed, bold;
-  font-size: 30px;
+  font-family: 'Arial', sans-serif, condensed, bold;
    font-weight: bold;
   color: #000000;
   margin-bottom: 2px;
   text-align: left;
-  max-width: 60%;
+  width: 100%;
+  font-size: 28px;
+  position: relative;
 }
 .nombre-en {
-  font-size: 20px;
   color: #777;
-  font-style: bold;
-  margin-top: -4px;
+  font-family: 'Arial', sans-serif, condensed, bold;
+   font-weight: bold;
+  margin-bottom: 2px;
+  text-align: left;
+  max-width: 100%;
+  font-size: 20px;
 }
 .producto-precio-vertical {
-   font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
+    font-family: 'Bebas Neue', sans-serif;
   font-weight: bold;
-  color: #C80000;
+  background-color: #C80000;
+  padding: 10px;
+  border-radius: 20px;
   display: flex;
-  flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
   gap: 2px;
-  text-align: right;
+  text-align: left;
   margin: 0px;
   white-space: nowrap;
   text-shadow: #d87e00 1px 1px 2px;
 }
 
 .precio-monto {
-font-family: 'Oswald Bold', sans-serif, condensed, bold;
+font-family: 'Arial', sans-serif, condensed, bold;
   font-size: 45px;
   font-weight: bold;
+ color: #fff;
 }
 
 .precio-unidad {
-  color: #C80000;
+  color: #ffffff;
   font-size: 20px;
+  
 }
-
-
-
 
 /*Resto de productos */
 
@@ -138,30 +158,26 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  max-height: 70vh; /* ajusta para que quepa con encabezado/pie */
-  overflow: hidden;
-  gap: 16px;
-  padding: 20px;
+  
 }
 
  .producto-card {
    box-sizing: border-box;
   display: inline-block;
-  width: 200px;
-  margin: 20px;
+  margin: 5px;
   text-align: center;
   background: transparent;
   border: none;
   box-shadow: none;
   padding: 4px;
-  margin-top: -60px;
  
 }
 
-.fila-5 .producto-card {
+/*.fila-5 .producto-card {
   flex: 1 1 calc(16.66% - 20px);
   max-width: calc(16.66% - 20px);
-  width: 100px;
+  width: 120px;
+  margin-right: 30px;
 }
 .fila-5 .nombre-es {
   font-size: 1rem;
@@ -178,15 +194,19 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
 .fila-5 .precio-unidad {
   font-size: 0.75rem;
 }
+*/
 
 
 
 
-
-.fila-4 .producto-card {
+/*.fila-4 .producto-card {
   flex: 1 1 calc(25% - 20px);
   max-width: calc(25% - 20px);
   width: 150px;
+}
+.fila-4 .producto-img {
+  width: 200px;
+  height: 150px;
 }
 .fila-4 .nombre-es {
   font-size: 1.2rem;
@@ -202,33 +222,84 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
 
 .fila-4 .precio-unidad {
   font-size: 0.85rem;
+}*/
+
+
+.fila-cuatro-productos {
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  
+}
+
+.fila-cuatro-productos .producto-card {
+  flex: 0 0 calc(33.333% - 12px);    /* 3 por fila + gap */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-height: 300px;                 /* ← unifica altura (ajusta 280–320) */
 }
 
 
-
-
-
-.fila-3 .producto-card {
-  flex: 1 1 calc(33.33% - 20px);
-  max-width: calc(33.33% - 20px);
-}
-.fila-3 .nombre-es {
-  font-size: 1.4rem;
+/* Imagen siempre igual */
+.fila-cuatro-productos .producto-img {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  display: block;                    /* elimina gap baseline */
 }
 
-.fila-3 .nombre-en {
-  font-size: 1rem;
+.fila-cuatro-productos .producto-info{
+  display: grid;
+  width: 100%;
+  flex-direction: flex;
+  text-align: right;
+  align-items: flex-start;
+  margin-top: -30px;
+
 }
 
-.fila-3 .precio-monto {
-  font-size: 1.6rem;
+/* Precio con alto mínimo para que no cambie la altura */
+.fila-cuatro-productos .producto-precio-vertical {
+  align-self: flex-start;
+  min-height: 40px;                  /* reserva (ajusta a tu chip) */
+  padding: 8px 10px;
+  white-space: nowrap;
 }
 
-.fila-3 .precio-unidad {
-  font-size: 0.9rem;
+/* Nombres: reserva de alto + clamp para cortar */
+.fila-cuatro-productos .producto-nombres {
+  min-height: 52px;                  /* 2 líneas aprox */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;                /* si prefieres centrado */
+  width: 100%;
 }
 
+.fila-cuatro-productos .nombre-es,
+.fila-cuatro-productos .nombre-en {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
+.fila-cuatro-productos .nombre-es {
+  -webkit-line-clamp: 2;             /* 1–2 según gusto */
+  font-size: 25px;
+}
+
+.fila-cuatro-productos .nombre-en {
+  -webkit-line-clamp: 1;
+  font-size: 20px;
+}
 
 /*Footer*/
 
@@ -237,13 +308,14 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
   justify-content: space-between;
   align-items: flex-start;
   padding: 15px 25px;
-  margin-top: 30px;
+  margin-top: 0px;
   border-top: 1px solid #ccc;
   font-family: 'Arial', sans-serif;
 }
 
 .cuadro-direccion {
   background-color: #2a8f48;
+  width: 30%;
   color: white;
   padding: 12px 20px;
   border-radius: 4px;
@@ -271,3 +343,18 @@ font-family: 'Oswald Bold', sans-serif, condensed, bold;
   text-align: right;
   line-height: 1.4;
 }
+.footer-map{
+width: 180px;
+height: 110px;
+
+}
+
+.producto-card.festivo .producto-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* o 'cover' si quieres que llene */
+  background: #fff;
+}
+
+
+

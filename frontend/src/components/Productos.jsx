@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EditarProducto from './EditarProducto';
 import '../styles/Productos.css';
+import BuscadorUnsplash from './BuscadorUnsplash';
+
+
 const Productos = () => {
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
@@ -10,11 +13,23 @@ const Productos = () => {
   const [imagen, setImagen] = useState(null);
   const [productos, setProductos] = useState([]);
   const [productoEditando, setProductoEditando] = useState(null);
-
+  const [imagenBase64, setImagenBase64] = useState('');
+  const [verificacion, setVerificacion] = useState(null);
+  const [selectedIds, setSelectedIds] = useState([]);
 
   useEffect(() => {
     cargarProductos();
   }, []);
+
+
+  useEffect(() => {
+  if (verificacion) {
+    console.log("🔗 Sitios donde aparece:");
+    verificacion.pagesWithMatchingImages.forEach(p => {
+      console.log(p.url);
+    });
+  }
+}, [verificacion]);
 
   const cargarProductos = async () => {
     try {
@@ -26,7 +41,7 @@ const Productos = () => {
   };
 
   const handleGuardar = async () => {
-    if (!nombre || !precio || !unidad || !categoria || !imagen) {
+    if (!nombre || !precio || !categoria || (!imagen && !imagenBase64)) {
       alert("Por favor, completa todos los campos.");
       return;
     }
@@ -36,7 +51,12 @@ const Productos = () => {
     formData.append("precio", precio);
     formData.append("unidad", unidad);
     formData.append("categoria", categoria);
-    formData.append("imagen", imagen);
+
+    if (imagenBase64) {
+    formData.append("imagenBase64", imagenBase64);
+  } else if (imagen) {
+    formData.append("imagen", imagen); // clave que deberás manejar en tu backend
+  }
 
     try {
       await axios.post("http://localhost:4000/api/productos", formData);
@@ -45,11 +65,13 @@ const Productos = () => {
       setUnidad("");
       setCategoria("");
       setImagen(null);
+      setImagenBase64("");
       cargarProductos();
     } catch (error) {
       console.error("Error al guardar producto", error);
     }
   };
+
   const togglePromocion = async (id, nuevaPromocion) => {
   try {
     await fetch(`http://localhost:4000/api/productos/${id}/promocion`, {
@@ -58,23 +80,25 @@ const Productos = () => {
       body: JSON.stringify({ promocion: nuevaPromocion }),
     });
 
-    // Actualiza el estado local recargando productos o modificando directamente el producto
-    setProductos((prev) =>
-      prev.map((prod) =>
-        prod._id === id ? { ...prod, promocion: nuevaPromocion } : prod
-      )
-    );
+   await cargarProductos();
   } catch (error) {
     console.error("Error actualizando promoción:", error);
   }
 };
+
+const orderOf = (id) => {
+  const p = productos.find(x => x._id === id);
+  return p?.promocion ? (p?.promoOrder ?? null) : null;
+};
+
+
 const eliminarProducto = async (id) => {
   if (!id) {
     console.error("ID inválido para eliminar producto");
     return;
   }
 
-  const confirmar = window.confirm("¿Estás seguro de que deseas eliminar este producto papu?");
+  const confirmar = window.confirm("¿Estás seguro de que deseas eliminar este producto ?");
   if (!confirmar) return;
 
   try {
@@ -82,6 +106,88 @@ const eliminarProducto = async (id) => {
     setProductos((prev) => prev.filter((prod) => prod._id !== id));
   } catch (error) {
     console.error("Error al eliminar producto", error);
+  }
+};
+
+const handleVerificarImagen = async () => {
+  if (!imagen) {
+    alert("Primero selecciona una imagen para verificar.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("imagen", imagen);
+
+  try {
+    const response = await axios.post("http://localhost:4000/api/productos/verificar-imagen", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    const { fullMatchingImages, partialMatchingImages, webEntities, pagesWithMatchingImages } = response.data;
+
+    // Guardar para mostrarlo en el frontend
+    setVerificacion({
+      webEntities,
+      pagesWithMatchingImages,
+    });
+
+    if (fullMatchingImages.length > 0 || partialMatchingImages.length > 0) {
+      alert("⚠️ Esta imagen fue encontrada en otros sitios. Podría tener copyright.");
+      console.log("Full:", fullMatchingImages);
+      console.log("Partial:", partialMatchingImages);
+      // Aquí más adelante podemos mostrar la opción de Unsplash
+    } else {
+      alert("✅ No se encontraron coincidencias. Esta imagen parece segura.");
+    }
+  } catch (error) {
+    console.error("Error al verificar la imagen:", error.message);
+    alert("Ocurrió un error al verificar la imagen.");
+  }
+};
+
+// Esta función se pasa como prop a <BuscadorUnsplash />
+const handleSeleccionarImagenUnsplash = (url) => {
+  setImagenBase64(url);    // Guarda la URL seleccionada
+  setImagen(null);         // Limpia la imagen local si había una
+};
+
+const handleFileUpload = (e) => {
+  setImagen(e.target.files[0]);
+  setImagenBase64(''); // Limpia base64 de Unsplash si elige imagen local
+};
+
+
+const eliminarFondoImagen = async () => {
+  try {
+    if (imagen) {
+      const formData = new FormData();
+      formData.append("imagen", imagen);
+
+      const response = await axios.post("http://localhost:4000/api/productos/eliminar-fondo-local", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("Imagen sin fondo:", response.data.nuevaImagen)
+      setImagenBase64(`http://localhost:4000/${response.data.nuevaImagen.replace(/^\/+/, '').replace(/\\/g, '/')}`);
+
+      console.log(imagenBase64)
+      setImagen(null);
+    } else if (imagenBase64) {
+      const response = await axios.post("http://localhost:4000/api/productos/eliminar-fondo-url", {
+        imageUrl: imagenBase64,
+      });
+
+      setImagenBase64(`http://localhost:4000/${response.data.nuevaImagen.replace(/^\/+/, '')}`);
+
+    } else {
+      alert("No hay imagen para procesar.");
+    }
+
+    alert("✅ Fondo eliminado correctamente");
+  } catch (error) {
+    console.error("❌ Error:", error);
+    alert("❌ Error al eliminar el fondo");
   }
 };
 
@@ -119,8 +225,8 @@ const eliminarProducto = async (id) => {
             <option value="LB">LB</option>
             <option value="EA">EA</option>
             <option value="OZ">OZ</option>
-            <option value="PK">PK</option>
-            
+            <option value="DZN">DZN</option>
+            <option value="CT">CT</option>
           </select>
           
         </div>
@@ -131,7 +237,7 @@ const eliminarProducto = async (id) => {
             onChange={(e) => setCategoria(e.target.value)}
           >
             <option value="">Selecciona una categoría</option>
-            <option value="Frutas">Frutas y Verduras</option>
+            <option value="frutas y verduras">Frutas y Verduras</option>
             <option value="Carnes">Carnes</option>
             <option value="Panaderia">Panadería</option>
             <option value="Abarrotes">Abarrotes</option>
@@ -142,14 +248,88 @@ const eliminarProducto = async (id) => {
           <input
             type="file"
             className="form-control"
-            onChange={(e) => setImagen(e.target.files[0])}
+            onChange={handleFileUpload}
           />
+
+          {(imagen || imagenBase64) && (
+            <>
+              <button
+                className="btn btn-warning mt-2 me-2"
+                onClick={handleVerificarImagen}
+                type="button"
+              >
+                🔍 Verificar imagen
+              </button>
+
+              <button
+                className="btn btn-outline-success mt-2 ms-2"
+                type="button"
+                onClick={eliminarFondoImagen}
+              >
+                ✂️ Eliminar fondo de la imagen
+              </button>
+            </>
+          )}
+    
+
+          <hr className="my-3 col-md-6" />
+
+            <p className="fw-bold">O elige una imagen desde Pixabay:</p>
+            <BuscadorUnsplash
+              onSeleccionar={handleSeleccionarImagenUnsplash}
+            />
+
+            {imagenBase64 && (
+              <div className="mt-3">
+                <p className="text-success">Imagen seleccionada:</p>
+                <img src={imagenBase64} alt="Unsplash" className="img-fluid rounded" />
+              </div>
+            )}
+            {imagen && (
+              <div className="mt-3">
+                <p className="text-primary">Vista previa (imagen local):</p>
+                <img
+                  src={URL.createObjectURL(imagen)}
+                  alt="Vista previa"
+                  className="img-fluid rounded"
+                />
+              </div>
+            )}
         </div>
-        <div className="col-md-12">
+        
+        <div className="col-md-6">
+          {verificacion?.pagesWithMatchingImages?.length > 0 && (
+            <div>
+              <h5>🔗 Sitios donde aparece esta imagen:</h5>
+              <ul>
+                {verificacion.pagesWithMatchingImages.map((pagina, i) => (
+                  <li key={i}>
+                    <a href={pagina.url} target="_blank" rel="noopener noreferrer">
+                      {pagina.url}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {verificacion?.webEntities?.length > 0 && (
+            <div>
+              <h5>📌 Entidades relacionadas:</h5>
+              <ul>
+                {verificacion.webEntities.map((entidad, i) => (
+                  <li key={i}>{entidad.description}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <button className="btn btn-primary" onClick={handleGuardar}>
             Guardar producto
           </button>
         </div>
+        <div className="col-md-6">
+          
+          
+          </div>
       </div>
 
       <hr className="my-5" />
@@ -167,7 +347,7 @@ const eliminarProducto = async (id) => {
               />
               <div className="card-body text-center">
                 <h5 className="card-title">{producto.nombre}</h5>
-                <p className="card-text">${producto.precio} / {producto.unidad}</p>
+                <p className="card-text">{producto.precio} / {producto.unidad}</p>
                 <span className="badge bg-info text-dark">{producto.categoria}</span>
                 <input
                   type="checkbox"
@@ -176,8 +356,16 @@ const eliminarProducto = async (id) => {
                   style={{ position: "absolute", top: 10, right: 10, transform: "scale(1.5)" }}
                   title="Marcar como promoción"
                 />
-                <label className="form-check-label ms-2">Seleccionar</label>
+                
                 <br></br>
+                {orderOf(producto._id) && (
+                  <span
+                    className="badge bg-primary"
+                    style={{ position: "absolute", top: 10, left: 10 }}
+                  >
+                    {orderOf(producto._id)}
+                  </span>
+                )}
                 <button
                   className="btn btn-sm btn-danger mt-2"
                   onClick={() => eliminarProducto(producto._id)}

@@ -35,7 +35,9 @@ router.post('/generar-folleto', async (req, res) => {
 router.get('/ver-folleto1', async (req, res) => {
   try {
     const generarHTMLPdf = require('../pdf/generarHTMLPdf');
-    generarHTMLPdf(req, res, {guardar: false}); // esta función ya genera y responde el PDF
+    const ids = req.query.ids ? String(req.query.ids).split(',').filter(Boolean) : [];
+    
+    generarHTMLPdf(req, res, {guardar: false, selectedIds: ids}); // esta función ya genera y responde el PDF
   } catch (err) {
     console.error(err);
     res.status(500).send('Error  vista previa del PDF');
@@ -45,7 +47,8 @@ router.get('/ver-folleto1', async (req, res) => {
 router.post('/guardar-pdf1', async (req, res) => {
   try {
     const generarHTMLPdf = require('../pdf/generarHTMLPdf');
-    await generarHTMLPdf(req, res, { guardar: true, generarJPG: true });
+    const { selectedIds = [] } = req.body || {};
+    await generarHTMLPdf(req, res, { guardar: true, generarJPG: true, selectedIds });
  // renderiza y guarda
   } catch (err) {
     console.error(err);

@@ -4,9 +4,10 @@ import Productos from './Productos';
 import RegistrarUsuario from './RegistrarUsuario';
 import GenerarPDF from './GenerarFolleto';
 import Historial from './Historial';
+import BaseDeDatos from './BaseDeDatos'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/MainPage.css'; // Asegúrate de tener este archivo CSS
-import { FaStar, FaFilePdf, FaClipboardList, FaBox } from 'react-icons/fa';
+import { FaStar, FaFilePdf, FaClipboardList, FaBox, FaDatabase } from 'react-icons/fa';
 
 const MainPage = () => {
   const [vista, setVista] = useState('productos');
@@ -31,6 +32,9 @@ const renderContenido = () => {
         return <GenerarPDF />;
       case 'historial':
         return <Historial />;
+      case 'baseDatos':                           // <-- NUEVO
+        return <BaseDeDatos />; 
+
       default:
         return <Productos />;
     }
@@ -88,11 +92,23 @@ const renderContenido = () => {
           <FaClipboardList className="me-2" /> Historial
         </button>
       </li>
+
+
+      {/* NUEVA OPCIÓN: Base de datos */}
+          <li className="nav-item mb-2">
+            <button className={`nav-link ${vista === 'baseDatos' ? 'active' : ''}`} onClick={() => setVista('baseDatos')}>
+              <FaDatabase className="me-2" /> Base de datos
+            </button>
+          </li>
+
+          
       <li className="nav-item">
         <button className={`nav-link ${vista === 'Registrar' ? 'active' : ''}`} onClick={() => setVista('Registrar')}>
           <FaStar className="me-2" /> Registrar Usuario
         </button>
       </li>
+
+
     </ul>
   </div>
 

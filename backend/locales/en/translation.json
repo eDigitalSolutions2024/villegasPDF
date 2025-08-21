@@ -56,9 +56,8 @@
   "queso": "cheese",
 
 
-  "carnes": "Meat",
-  "frutas": "Produce",
-  "abarrotes": "Groceries",
-  "panaderia": "Bakery",
-  "taqueria": "Tacos"
+  "carnes": "/ Meat",
+  "frutas y verduras": "/ Produce",
+  "abarrotes": "/ Grocery",
+  "panaderia": "/ Bakery"
 }
